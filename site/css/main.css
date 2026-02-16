@@ -1,0 +1,211 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.hero {
+  background: url(../img/Khakassia5.png) no-repeat center center;
+  background-size: cover;
+  width: 100%;
+  height: 100vh;
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.hero::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100%;
+  height: 2px;
+  background: linear-gradient(135deg, #C6A96B, #E6C98A);
+  border-radius: 1px;
+  overflow: hidden;
+  animation: borderSlide 3s linear infinite;
+  z-index: 3;
+}
+@keyframes borderSlide {
+  0% {
+    background-position: 0% 0%;
+  }
+  100% {
+    background-position: 200% 0%;
+  }
+}
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: rgba(0, 0, 0, 0.55);
+}
+.hero .hero-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 32px;
+  z-index: 2;
+}
+.hero .hero-inner h1 {
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 44px;
+  font-weight: 500;
+  color: #daccb5;
+  letter-spacing: 0.5px;
+  filter: brightness(110%);
+}
+.hero .hero-inner h2 {
+  font-family: "Inter", sans-serif;
+  font-size: 24px;
+  font-weight: 400;
+  color: #daccb5;
+  opacity: 0.95;
+}
+.hero .hero-inner .hero-btn {
+  font-family: "Inter", sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  padding: 14px 32px;
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+  text-decoration: none;
+  background: linear-gradient(135deg, #C6A96B, #E6C98A);
+  color: #0D0F12;
+  position: relative;
+  overflow: hidden;
+  filter: brightness(110%);
+  transition: all 0.7s ease;
+}
+.hero .hero-inner .hero-btn:hover {
+  transform: translateY(-2px);
+}
+.hero .hero-inner .hero-btn::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 80%;
+  height: 17px;
+  background: radial-gradient(circle, rgba(252, 242, 176, 0.719) 0%, rgba(255, 215, 0, 0) 110%);
+  pointer-events: none;
+  filter: brightness(115%);
+}
+.hero .hero-inner .hero-btn:hover::before {
+  filter: brightness(125%);
+}
+
+.section-two {
+  width: 100%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 40px 20px 20px;
+  gap: 24px;
+  position: relative;
+  background: url(../img/gora-borus.jpg);
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: bottom;
+}
+.section-two::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: rgba(0, 0, 0, 0.55);
+}
+.section-two h2 {
+  font-family: "Playfair Display", Georgia, serif;
+  font-size: 32px;
+  font-weight: 500;
+  color: #daccb5;
+  z-index: 2;
+}
+.section-two p {
+  font-family: "Inter", sans-serif;
+  font-size: 20px;
+  font-weight: 400;
+  color: #daccb5;
+  opacity: 0.95;
+  z-index: 2;
+}
+.section-two__inner {
+  display: flex;
+  gap: 40px;
+  flex-wrap: wrap;
+  justify-content: center;
+  z-index: 2;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 16px;
+  padding: 20px;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+.section-two__inner .dropdown {
+  position: relative;
+  width: 300px;
+}
+.section-two__inner .dropdown-button {
+  background: transparent;
+  color: #dbd2c4;
+  padding: 12px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 100%;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+.section-two__inner .dropdown-button span {
+  color: #D4AF37;
+}
+.section-two__inner .dropdown-button:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}
+.section-two__inner .dropdown-content {
+  top: 100%;
+  left: 0;
+  right: 0;
+  border: 1px solid #D4AF37;
+  border-radius: 4px;
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 10;
+}
+.section-two__inner .dropdown-content.active {
+  max-height: 500px;
+  transition: max-height 0.5s ease;
+}
+.section-two__inner .dropdown .schedule-item {
+  padding: 12px 20px;
+  border-bottom: 1px solid #D4AF37;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.section-two__inner .dropdown .schedule-item:last-child {
+  border-bottom: none;
+}
+.section-two__inner .dropdown .schedule-item .day-title {
+  font-weight: bold;
+  margin-bottom: 5px;
+  color: #dbd2c4;
+}/*# sourceMappingURL=main.css.map */
