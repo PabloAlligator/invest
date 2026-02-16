@@ -5,7 +5,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
+    <link rel="shortcut icon" href="site/img/лого золотое-Photoroom.png">
     <title>Tourism Platform Khakassia — Investment</title>
 
     <link rel="stylesheet" href="site/styles/main.css">
@@ -16,17 +16,61 @@
 </head>
 
 <body>
+
+    <!-- Прелоудер: дождь из долларов -->
+    <div class="preloader">
+        <div class="preloader__inner">
+            <div class="preloader__text">
+                <h1>Хакасия.<br>Твоё Путешествие</h1>
+                <p>Загрузка инвестиционных данных</p>
+            </div>
+        </div>
+        <!-- Контейнер для частиц-долларов -->
+        <div class="preloader__rain" id="rainContainer"></div>
+    </div>
+
+    <header class="header">
+        <div class="header__container">
+            <div class="header__logo">
+                <img src="site/img/лого золотое-Photoroom.png" alt="Хакасия. Твоё Путешествие">
+            </div>
+
+            <div class="header__burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+            <nav class="header__menu">
+                <ul class="header__list">
+                    <li><a href="#potencial" class="header__link">Инвестиционная модель</a></li>
+                    <li><a href="#potencial" class="header__link">Потенциал доходов от платформы</a></li>
+                    <li><a href="#price" class="header__link">Оценка стоимости платформы</a></li>
+                    <li><a href="#razrabotka" class="header__link">Оценка разработки платформы</a></li>
+                    <li><a href="#prognoz" class="header__link">Прогноз доходов на 5 лет</a></li>
+                    <li><a href="#roi" class="header__link">Окупаемость</a></li>
+                    <li><a href="#advantages" class="header__link">Преимущества платформы для бизнеса</a></li>
+                    <li><a href="#win" class="header__link">Отличия от других агрегаторов</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Затемнение фона при открытом меню -->
+    <div class="header__overlay"></div>
+
     <section class="hero">
         <div class="hero-inner">
             <h1>Хакасия. <br>Твоё Путешествие</h1>
             <h2>Первая платформа <br>для бизнеса и туристов <br> в регионе</h2>
-            <a class="hero-btn" href="#">Посмотреть инвестиционную модель</a>
+            <a class="hero-btn" href="#potencial">ПОСМОТРЕТЬ ИНВЕСТИЦИОННУЮ МОДЕЛЬ</a>
         </div>
     </section>
 
     <!-- section-two -->
 
-    <section class="section-two">
+    <section class="section-two" id="potencial">
+        <hr class="gradient-hr">
         <h2>Потенциал доходов от платформы</h2>
 
         <div class="section-two__inner">
@@ -85,8 +129,10 @@
                     <div class="schedule-item" data-sport="Вольная борьба">
                         <div class="day-title">Турфирмы, турбазы, прокаты авто, конюшни, музеи и кафе размещают платные
                             баннеры на платформе — турист видит предложение прямо при планировании поездки. <br>
-                           <br>Стоимость 10 000 ₽/мес.  <br><br>При 100 фирмах доход = 12 млн ₽/год, <br> при 150 фирмах → 18 млн ₽/год, <br> <br>Бизнес
-                            получает целевых клиентов, мы — стабильный доход</div>
+                            <br>Стоимость 10 000 ₽/мес. <br><br>При 100 фирмах доход = 12 млн ₽/год, <br> при 150 фирмах
+                            → 18 млн ₽/год, <br> <br>Бизнес
+                            получает целевых клиентов, мы — стабильный доход
+                        </div>
                     </div>
                 </div>
             </div>
@@ -96,7 +142,8 @@
 
     <!-- price -->
 
-    <section class="price">
+    <section class="price" id="price">
+        <hr class="gradient-hr">
         <h2>
             Оценка стоимости платформы
         </h2>
@@ -114,40 +161,342 @@
         </div>
     </section>
 
-     <!-- price -->
+    <!-- razrabotka -->
 
-    <section class="razrabotka">
-        <h2>
-            Оценка разработки платформы
-        </h2>
+    <section class="razrabotka" id="razrabotka">
+        <hr class="gradient-hr">
+        <h2>Оценка разработки платформы</h2>
 
-        <div class="price-inner">
-            <div class="price-block">
-                <h3>Bacend + API</h3>
-                <p>3-5 млн ₽ </p>
+        <table class="razrabotka-table">
+            <thead>
+                <tr>
+                    <th>Компонент</th>
+                    <th>Стоимость</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Backend + API</td>
+                    <td>3–5 млн ₽</td>
+                </tr>
+                <tr>
+                    <td>Frontend (iOS + Android / Web)</td>
+                    <td>4–6 млн ₽</td>
+                </tr>
+                <tr>
+                    <td>UI/UX дизайн</td>
+                    <td>1–2 млн ₽</td>
+                </tr>
+                <tr>
+                    <td>Админка и аналитика</td>
+                    <td>1,5–2,5 млн ₽</td>
+                </tr>
+                <tr>
+                    <td>Тестирование и инфраструктура</td>
+                    <td>2–3 млн ₽</td>
+                </tr>
+                <tr>
+                    <td>Итого:</td>
+                    <td>11.5 – 18.5 млн ₽</td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <!-- prognoz -->
+
+    <section class="revenue" id="prognoz">
+        <hr class="gradient-hr">
+        <h2>Прогноз доходов платформы на 5 лет</h2>
+
+        <img src="site/img/photo_2026-02-16_14-39-39.jpg" alt="">
+
+        <div class="revenue-list">
+
+            <div class="revenue-item">
+                <div class="revenue-item__year">1 год</div>
+                <div class="revenue-item__text">
+                    Запуск платформы, привлечение пользователей и первых партнёров
+                </div>
+                <div class="revenue-item__income">30–40 млн ₽</div>
             </div>
 
-            <div class="price-block">
-                <h3>Frontend (IOS+Android / Web)</h3>
-                <p>4-6 млн ₽ </p>
+            <div class="revenue-item">
+                <div class="revenue-item__year">2 год</div>
+                <div class="revenue-item__text">
+                    Активный рост аудитории и увеличение количества организаций
+                </div>
+                <div class="revenue-item__income">50–70 млн ₽</div>
             </div>
 
-            <div class="price-block">
-                <h3>UI/UX дизайн</h3>
-                <p>1 - 2 млн ₽ </p>
+            <div class="revenue-item">
+                <div class="revenue-item__year">3 год</div>
+                <div class="revenue-item__text">
+                    Масштабирование платформы и подключение новых регионов
+                </div>
+                <div class="revenue-item__income">80–110 млн ₽</div>
             </div>
 
-            <div class="price-block">
-                <h3>Админка и аналитика</h3>
-                <p>1,5 – 2,5 млн ₽ </p>
+            <div class="revenue-item">
+                <div class="revenue-item__year">4 год</div>
+                <div class="revenue-item__text">
+                    Расширение рынка и увеличение партнёрских доходов
+                </div>
+                <div class="revenue-item__income">120–160 млн ₽</div>
             </div>
 
-            <div class="price-block">
-                <h3>тестирование, инфраструктура</h3>
-                <p>2 – 3 млн ₽ </p>
+            <div class="revenue-item">
+                <div class="revenue-item__year">5 год</div>
+                <div class="revenue-item__text">
+                    Стабильный рост и выход на федеральный уровень
+                </div>
+                <div class="revenue-item__income">180–250 млн ₽</div>
+            </div>
+
+            <div class="revenue-item">
+                <div class="revenue-item__year">Срок окупаемости</div>
+                <div class="revenue-item__income">Окупаемость 1-2 года при первых подключениях</div>
             </div>
         </div>
     </section>
+
+    <!-- roi -->
+
+    <section class="roi" id="roi">
+        <hr class="gradient-hr">
+        <h2 class="roi__title">Окупаемость подписки</h2>
+
+        <div class="roi__cards">
+
+            <div class="roi__card">
+                <h3 class="roi__card-title">База отдыха</h3>
+
+                <div class="roi__item">
+                    <span class="roi__icon"><img src="site/img/icons8-home-50.png" alt=""></span>
+                    <span><b>5–10</b> бронирований</span>
+                </div>
+
+                <div class="roi__price">
+                    180 000 ₽ <span>доход</span>
+                </div>
+
+                <div class="roi__item">
+                    <span class="roi__icon"><img src="site/img/icons8-subscription-50.png" alt=""></span>
+                    <span>Подписка <b>5 000 ₽</b></span>
+                </div>
+
+                <div class="roi__item">
+                    <span class="roi__icon"><img src="site/img/icons8-graph-50.png" alt=""></span>
+                    <span>Быстрая окупаемость</span>
+                </div>
+            </div>
+
+            <div class="roi__card">
+                <h3 class="roi__card-title">Турфирма</h3>
+
+                <div class="roi__item">
+                    <span class="roi__icon"><img src="site/img/icons8-home-50.png" alt=""></span>
+                    <span><b>5–10</b> туров в мес.</span>
+                </div>
+
+                <div class="roi__price">
+                    100 000 ₽ <span>выручка</span>
+                </div>
+
+                <div class="roi__item">
+                    <span class="roi__icon"><img src="site/img/icons8-subscription-50.png" alt=""></span>
+                    <span>Подписка <b>5 000 ₽</b></span>
+                </div>
+
+                <div class="roi__item">
+                    <span class="roi__icon"><img src="site/img/icons8-graph-50.png" alt=""></span>
+                    <span>Высокий ROI</span>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- преимущества -->
+
+    <section class="advantages" id="advantages">
+        <hr class="gradient-hr">
+        <h2>Преимущества платформы для бизнеса</h2>
+
+        <div class="acc-schedule">
+            <div class="acc-item">
+                <div class="acc-head">
+                    <span class="acc-day">Прямой доступ к клиентам</span>
+                    <span class="acc-icon">+</span>
+                </div>
+                <div class="acc-content">
+                    <div class="acc-time">
+                        <ul>
+                            <li>Целевая аудитория на платформе: туристы, которые реально ищут места для отдыха в
+                                Хакасии.</li>
+                            <li>Вместо Яндекс.Директ, Instagram или контекстной рекламы, бизнес получает готовый поток
+                                потенциальных клиентов.</li>
+                            <li>Пример: база отдыха с 10–20 бронированиями в месяц через платформу окупает подписку за
+                                1–2 недели.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="acc-item">
+                <div class="acc-head">
+                    <span class="acc-day">Экономия на маркетинге</span>
+                    <span class="acc-icon">+</span>
+                </div>
+                <div class="acc-content">
+                    <div class="acc-time">
+                        <ul>
+                            <li>Малые объекты туризма тратят сотни тысяч рублей на создание сайтов.</li>
+                            <li>Малые объекты туризма тратят десятки тысяч рублей на рекламу, чтобы их нашли в поиске.
+                            </li>
+                            <li>5 000 ₽/мес — фиксированная и прозрачная стоимость с гарантированным размещением.</li>
+                            <li>Платят не за “видимость на сайте”, а за конкретный инструмент продаж и бронирований.
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="acc-item">
+                <div class="acc-head">
+                    <span class="acc-day">Продвижение и приоритетное размещение</span>
+                    <span class="acc-icon">+</span>
+                </div>
+                <div class="acc-content">
+                    <div class="acc-time">
+                        <ul>
+                            <li>Платформа позволяет бизнесу поднимать свои объекты выше в поиске, продвигать акции и
+                                туры.</li>
+                            <li>Подписка даёт конкурентное преимущество: туристы видят их первыми.</li>
+                            <li>Для турфирм это значит больше клиентов без дополнительных усилий.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="acc-item">
+                <div class="acc-head">
+                    <span class="acc-day">Цифровые инструменты</span>
+                    <span class="acc-icon">+</span>
+                </div>
+                <div class="acc-content">
+                    <div class="acc-time">
+                        <ul>
+                            <li>Платформа позволяет загружать фотографии, видео, описание, меню услуг.</li>
+                            <li>Можно отслеживать статистику: сколько людей просмотрели карточку, сколько забронировали,
+                                какие ключевые слова привели клиентов.</li>
+                            <li>Для владельцев это прозрачный инструмент маркетинга.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="acc-item">
+                <div class="acc-head">
+                    <span class="acc-day">Дополнительные источники дохода для бизнеса</span>
+                    <span class="acc-icon">+</span>
+                </div>
+                <div class="acc-content">
+                    <div class="acc-time">
+                        <ul>
+                            <li>Возможность продвигать экскурсии и туры, продавать дополнительные услуги прямо через
+                                платформу.</li>
+                            <li>Подписка + платные рекламные возможности – бизнес сам решает, сколько инвестировать в
+                                продвижение.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="acc-item">
+                <div class="acc-head">
+                    <span class="acc-day">Прямое преимущество над TripAdvisor</span>
+                    <span class="acc-icon">+</span>
+                </div>
+                <div class="acc-content">
+                    <div class="acc-time">
+                        <ul>
+                            <li>TripAdvisor — глобальная платформа, туристы видят много вариантов, а малый бизнес
+                                теряется среди тысяч объектов.</li>
+                            <li>На нашей платформе всё сосредоточено на Хакасии, нет конкуренции с глобальными брендами,
+                                турфирмы и базы видны сразу.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+    </section>
+
+    <!-- TripAdvisor -->
+
+    <section class="concurent" id="win">
+        <hr class="gradient-hr">
+        <h2>Почему мы выигрываем у TripAdvisor</h2>
+
+        <div class="concurent__wrapper">
+            <!-- Колонка TripAdvisor -->
+            <div class="concurent__card">
+                <div class="concurent__header">
+                    <span class="concurent__icon">🌍</span>
+                    <h3>TripAdvisor</h3>
+                </div>
+                <ul class="concurent__list">
+                    <li><span class="concurent__mark">✗</span> Слабая ориентация на регион</li>
+                    <li><span class="concurent__mark">✗</span> Общая база отзывов</li>
+                    <li><span class="concurent__mark">✗</span> Общий поиск без локальных фильтров</li>
+                    <li><span class="concurent__mark">✗</span> Сложности с монетизацией для местного бизнеса</li>
+                    <li><span class="concurent__mark">✗</span> Мало цифровых продуктов (гиды, подборки)</li>
+                </ul>
+            </div>
+
+            <!-- Колонка Вашей платформы -->
+            <div class="concurent__card advantage">
+                <div class="concurent__header">
+                    <span class="concurent__icon"><img src="site/img/лого золотое-Photoroom.png" alt=""></span>
+                    <h3>Хакасия. Твоё Путешествие</h3>
+                </div>
+                <ul class="concurent__list">
+                    <li><span class="concurent__mark">✓</span> Полное погружение в Хакасию</li>
+                    <li><span class="concurent__mark">✓</span> Подписка и бизнес-витрины</li>
+                    <li><span class="concurent__mark">✓</span> Продвижение по интересам и подборкам</li>
+                    <li><span class="concurent__mark">✓</span> Гибкая монетизация: подписка + реклама</li>
+                    <li><span class="concurent__mark">✓</span> Медийные инструменты и связь с аудиторией</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Футер -->
+    <footer class="footer">
+        <hr class="gradient-hr">
+
+        <div class="footer__content">
+            <div class="footer__row">
+                <div class="footer__logo">
+                    <img src="site/img/лого золотое-Photoroom.png" alt="Хакасия. Твоё Путешествие">
+                </div>
+
+                <div class="footer__nav">
+                    <a href="#potencial">Инвестиционная модель</a>
+                    <a href="#potencial">Потенциал доходов</a>
+                    <a href="#price">Оценка стоимости</a>
+                    <a href="#prognoz">Прогноз на 5 лет</a>
+                    <a href="#roi">Окупаемость</a>
+                    <a href="#advantages">Преимущества</a>
+                </div>
+            </div>
+
+            <div class="footer__bottom">
+                <div class="footer__copyright">
+                    © 2026 Хакасия. Твоё Путешествие
+                </div>
+            </div>
+        </div>
+    </footer>
 
     <script src="site/js/js.js"></script>
 </body>

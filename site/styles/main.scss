@@ -1,8 +1,8 @@
 $playfair: "Playfair Display", Georgia, serif;
 $inter: "Inter", sans-serif;
-
 $grafit: #0D0F12;
-$gold: #D4AF37;
+$gold: #fbcf95;
+
 $gold-gradient: linear-gradient(135deg, #C6A96B, #E6C98A);
 
 
@@ -18,6 +18,319 @@ body {
     align-items: center;
 }
 
+// Прелоудер с дождем из долларов
+.preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background: $grafit; // Используем ваш любимый темный фон
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+    transition: opacity 0.8s ease, visibility 0.8s ease;
+
+    &.hidden {
+        opacity: 0;
+        visibility: hidden;
+    }
+
+    &__inner {
+        position: relative;
+        z-index: 2;
+        text-align: center;
+        max-width: 800px;
+        padding: 0 20px;
+    }
+
+    &__text {
+        h1 {
+            font-family: $playfair;
+            font-size: 48px;
+            font-weight: 500;
+            color: #daccb5;
+            margin-bottom: 20px;
+            letter-spacing: 0.5px;
+            filter: brightness(110%);
+            animation: titlePulse 2s ease-in-out infinite alternate;
+
+            @media (max-width: 768px) {
+                font-size: 36px;
+            }
+        }
+
+        p {
+            font-family: $inter;
+            font-size: 18px;
+            color: rgba($gold, 0.9);
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            position: relative;
+            display: inline-block;
+
+            &::after {
+                content: '';
+                position: absolute;
+                bottom: -10px;
+                left: 0;
+                width: 100%;
+                height: 2px;
+                background: $gold-gradient;
+                animation: lineWidth 1.5s ease-in-out infinite;
+            }
+        }
+    }
+
+    // Контейнер для дождя
+    &__rain {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none; // Чтобы частицы не мешали кликать
+        z-index: 1;
+    }
+}
+
+// Стили для частиц (будут создаваться через JS)
+.dollar-particle {
+    position: absolute;
+    color: $gold;
+    font-size: 24px;
+    font-weight: bold;
+    opacity: 0;
+    animation: rainDown linear forwards; // Изменено название анимации
+    text-shadow: 0 0 10px rgba($gold, 0.5);
+    z-index: 1;
+    user-select: none;
+    pointer-events: none;
+}
+
+// Новая анимация - СВЕРХУ ВНИЗ
+@keyframes rainDown {
+    0% {
+        transform: translateY(-20vh) rotate(0deg);
+        opacity: 0.8;
+    }
+    100% {
+        transform: translateY(120vh) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+@keyframes titlePulse {
+    from {
+        text-shadow: 0 0 20px rgba($gold, 0.3);
+    }
+
+    to {
+        text-shadow: 0 0 40px rgba($gold, 0.6);
+    }
+}
+
+@keyframes lineWidth {
+    0% {
+        width: 0;
+        left: 50%;
+    }
+
+    50% {
+        width: 100%;
+        left: 0;
+    }
+
+    100% {
+        width: 0;
+        left: 50%;
+    }
+}
+
+.header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px 0;
+    background: rgba($grafit, 0.9);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    z-index: 1000;
+    border-bottom: 1px solid rgba($gold, 0.2);
+    transition: transform 0.5s ease;
+
+    &__container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        position: relative;
+    }
+
+    &__logo {
+        img {
+            width: 80px;
+            display: block;
+        }
+    }
+
+    &__burger {
+        display: none;
+        width: 30px;
+        height: 20px;
+        position: relative;
+        cursor: pointer;
+        z-index: 1002;
+
+        span {
+            position: absolute;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: $gold;
+            border-radius: 2px;
+            transition: all 0.3s ease;
+
+            &:first-child {
+                top: 0;
+            }
+
+            &:nth-child(2) {
+                top: 9px;
+            }
+
+            &:last-child {
+                bottom: 0;
+            }
+        }
+
+        &.active {
+            span {
+                &:first-child {
+                    transform: rotate(45deg);
+                    top: 9px;
+                }
+
+                &:nth-child(2) {
+                    opacity: 0;
+                    transform: scale(0);
+                }
+
+                &:last-child {
+                    transform: rotate(-45deg);
+                    bottom: 9px;
+                }
+            }
+        }
+
+        @media (max-width: 992px) {
+            display: block;
+        }
+    }
+
+    &__menu {
+        @media (max-width: 992px) {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 300px;
+            height: 100vh;
+            background: $grafit;
+            padding: 80px 30px 30px;
+            transition: right 0.4s ease;
+            z-index: 1001;
+            border-left: 1px solid rgba($gold, 0.3);
+            overflow-y: auto;
+
+            &.active {
+                right: 0;
+            }
+        }
+    }
+
+    &__list {
+        display: flex;
+        align-items: center;
+        gap: 30px;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+
+        @media (max-width: 992px) {
+            flex-direction: column;
+            align-items: flex-start;
+            gap: 20px;
+        }
+    }
+
+    &__link {
+        font-family: $inter;
+        font-size: 14px;
+        color: #daccb5;
+        text-decoration: none;
+        transition: all 0.3s ease;
+        white-space: nowrap;
+        position: relative;
+
+        @media (max-width: 992px) {
+            font-size: 18px;
+            white-space: normal;
+        }
+
+        &:hover {
+            color: $gold;
+        }
+
+        &::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: $gold-gradient;
+            transition: width 0.3s ease;
+        }
+
+        &:hover::after {
+            width: 100%;
+        }
+    }
+
+    &__overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.7);
+        backdrop-filter: blur(3px);
+        -webkit-backdrop-filter: blur(3px);
+        z-index: 999;
+        opacity: 0;
+        transition: opacity 0.3s ease;
+
+        &.active {
+            display: block;
+            opacity: 1;
+        }
+    }
+}
+
+body {
+    padding-top: 80px;
+
+    @media (max-width: 768px) {
+        padding-top: 70px;
+    }
+}
+
 .hero {
     background: url(../img/Khakassia5.png) no-repeat center center;
     background-size: cover;
@@ -27,21 +340,6 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-
-    &::after {
-        content: "";
-        position: absolute;
-        bottom: 0; // внизу секции
-        left: 50%;
-        transform: translateX(-50%);
-        width: 100%;
-        height: 2px;
-        background: $gold-gradient;
-        border-radius: 1px;
-        overflow: hidden;
-        animation: borderSlide 3s linear infinite;
-        z-index: 3;
-    }
 
     @keyframes borderSlide {
         0% {
@@ -88,40 +386,44 @@ body {
 
         .hero-btn {
             font-family: $inter;
-            font-weight: 500;
+            font-weight: 700;
             font-size: 16px;
             padding: 14px 32px;
             border: none;
             border-radius: 2px;
             cursor: pointer;
             text-decoration: none;
-            background: $gold-gradient; // твой градиент
+            background: $gold-gradient;
             color: $grafit;
             position: relative;
             overflow: hidden;
             filter: brightness(110%);
-            transition: all 0.7s ease;
+            transition: all 0.3s ease;
 
-            &:hover {
-                transform: translateY(-2px);
+            animation: glowing 1.5s ease-in-out infinite alternate;
+
+            &:hover,
+            &:focus,
+            &:active {
+                transform: translateY(-3px) scale(1.02);
+                filter: brightness(120%);
+            }
+        }
+
+        /* keyframes отдельно */
+        @keyframes glowing {
+            from {
+                box-shadow:
+                    0 0 10px rgba(255, 215, 0, 0.4),
+                    0 0 20px rgba(255, 215, 0, 0.3),
+                    0 0 30px rgba(212, 172, 181, 0.2);
             }
 
-            &::before {
-                content: "";
-                position: absolute;
-                top: 0;
-                left: 50%;
-                transform: translateX(-50%);
-                width: 80%;
-                height: 17px;
-                background: radial-gradient(circle, rgba(252, 242, 176, 0.719) 0%, rgba(255, 215, 0, 0) 110%);
-                pointer-events: none;
-                filter: brightness(115%);
-            }
-
-            &:hover::before {
-                // background: radial-gradient(circle, rgba(255, 215, 0, 1) 0%, rgba(255, 215, 0, 0) 80%);
-                filter: brightness(125%);
+            to {
+                box-shadow:
+                    0 0 20px rgba(255, 215, 0, 0.6),
+                    0 0 40px rgba(255, 215, 0, 0.4),
+                    0 0 60px rgba(212, 172, 181, 0.3);
             }
         }
 
@@ -152,6 +454,24 @@ body {
         z-index: 1;
         background: rgba(0, 0, 0, 0.55);
     }
+
+    .gradient-hr {
+        border: none;
+        height: 3px;
+        width: 100%;
+        background: linear-gradient(90deg,
+                transparent,
+                rgba(251, 207, 149, 0.3),
+                rgba(251, 207, 149, 1),
+                rgba(251, 207, 149, 0.3),
+                transparent);
+        border-radius: 50px;
+        animation: gradientFlow 8s linear infinite;
+        position: absolute;
+        top: 0;
+        z-index: 4;
+    }
+
 
     h2 {
         font-family: $playfair;
@@ -255,10 +575,28 @@ body {
     flex-direction: column;
     align-items: center;
     text-align: center;
-    padding: 40px 20px 20px;
+    padding: 40px 20px 40px;
     gap: 24px;
     position: relative;
     background: $grafit;
+
+    .gradient-hr {
+        border: none;
+        height: 3px;
+        width: 100%;
+        background: linear-gradient(90deg,
+                transparent,
+                rgba(251, 207, 149, 0.3),
+                rgba(251, 207, 149, 1),
+                rgba(251, 207, 149, 0.3),
+                transparent);
+        border-radius: 50px;
+        animation: gradientFlow 8s linear infinite;
+        position: absolute;
+        top: 0;
+        z-index: 4;
+    }
+
 
     h2 {
         font-family: $playfair;
@@ -277,7 +615,7 @@ body {
     }
 
     .price-block {
-        border: 1px solid gold;
+        border: 1px solid $gold;
         padding: 20px;
         background: rgba(255, 255, 255, 0.2);
         border-radius: 4px;
@@ -299,5 +637,636 @@ body {
             font-weight: 400;
             color: #daccb5;
         }
+    }
+}
+
+// razrabotka
+.razrabotka {
+    width: 100%;
+    padding: 40px 20px 20px;
+    text-align: center;
+    position: relative;
+    background: url(../img/images.jpg) no-repeat bottom;
+    background-size: cover;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+
+    &::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        background: rgba(0, 0, 0, 0.55);
+    }
+
+    h2 {
+        font-family: $playfair;
+        font-size: 32px;
+        font-weight: 500;
+        color: #daccb5;
+        z-index: 2;
+        position: relative;
+    }
+
+    .gradient-hr {
+        border: none;
+        height: 3px;
+        width: 100%;
+        background: linear-gradient(90deg,
+                transparent,
+                rgba(251, 207, 149, 0.3),
+                rgba(251, 207, 149, 1),
+                rgba(251, 207, 149, 0.3),
+                transparent);
+        border-radius: 50px;
+        animation: gradientFlow 8s linear infinite;
+        position: absolute;
+        top: 0;
+        z-index: 4;
+    }
+
+
+    .razrabotka-table {
+        width: 100%;
+        max-width: 800px;
+        margin: 0 auto;
+        border-collapse: collapse;
+        z-index: 2;
+        position: relative;
+
+        th,
+        td {
+            padding: 16px 20px;
+            color: #daccb5;
+            font-family: $inter;
+            font-size: 16px;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        th {
+            font-family: $playfair;
+            font-size: 18px;
+            font-weight: 500;
+            text-align: center;
+        }
+
+        td {
+            text-align: center;
+        }
+    }
+}
+
+// prognoz
+.revenue {
+    width: 100%;
+    padding: 40px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    position: relative;
+    overflow: hidden;
+
+    /* тот же премиальный графитовый фон */
+    background:
+        radial-gradient(circle at 20% 30%, rgba(212, 172, 181, 0.06), transparent 40%),
+        radial-gradient(circle at 80% 70%, rgba(255, 215, 0, 0.05), transparent 40%),
+        linear-gradient(180deg, #0f0f10 0%, #161618 50%, #0c0c0d 100%);
+
+    h2 {
+        font-family: $playfair;
+        font-size: 32px;
+        font-weight: 500;
+        color: #daccb5;
+        letter-spacing: 1px;
+        z-index: 2;
+        text-align: center;
+    }
+
+    .gradient-hr {
+        border: none;
+        height: 3px;
+        width: 100%;
+        background: linear-gradient(90deg,
+                transparent,
+                rgba(251, 207, 149, 0.3),
+                rgba(251, 207, 149, 1),
+                rgba(251, 207, 149, 0.3),
+                transparent);
+        border-radius: 50px;
+        animation: gradientFlow 8s linear infinite;
+        position: absolute;
+        top: 0;
+        z-index: 4;
+    }
+
+
+
+    img {
+        max-width: 500px;
+        width: 100%;
+        border-radius: 12px;
+        border: 1px solid rgba(212, 172, 181, 0.3);
+        clip-path: inset(15px 11px 0 0);
+        box-shadow:
+            0 0 30px rgba(212, 172, 181, 0.15),
+            0 10px 40px rgba(0, 0, 0, 0.7);
+        align-self: center;
+        z-index: 2;
+    }
+
+
+    .revenue-list {
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+        max-width: 700px;
+        width: 100%;
+        z-index: 2;
+    }
+
+    .revenue-item {
+        padding: 20px 25px;
+        border-radius: 10px;
+        background: rgba(255, 255, 255, 0.04);
+        backdrop-filter: blur(20px);
+        -webkit-backdrop-filter: blur(20px);
+        border-left: 3px solid #daccb5;
+        border: 1px solid rgba(212, 172, 181, 0.2);
+        box-shadow:
+            0 5px 20px rgba(0, 0, 0, 0.6);
+        border-left: 3px solid $gold;
+        // transition: 0.3s ease;
+
+        // &:hover {
+        //     transform: translateX(8px);
+
+
+        //     box-shadow:
+        //         0 0 20px rgba(212, 172, 181, 0.2),
+        //         0 10px 40px rgba(0, 0, 0, 0.8);
+        // }
+    }
+
+    .revenue-item__year {
+        font-family: $playfair;
+        font-size: 20px;
+        font-weight: 500;
+        color: #daccb5;
+        margin-bottom: 6px;
+    }
+
+    .revenue-item__text {
+        font-family: $inter;
+        font-size: 15px;
+        color: rgba(218, 204, 181, 0.85);
+    }
+
+    .revenue-item__income {
+        font-family: $inter;
+        font-size: 18px;
+        font-weight: 600;
+        color: $gold;
+        margin-top: 6px;
+    }
+}
+
+//  roi
+.roi {
+    padding: 40px 20px;
+    width: 100%;
+    background: #0f0f10;
+    color: #daccb5;
+    text-align: center;
+    font-family: 'Inter', sans-serif;
+    position: relative;
+
+    .gradient-hr {
+        border: none;
+        height: 3px;
+        width: 100%;
+        background: linear-gradient(90deg,
+                transparent,
+                rgba(251, 207, 149, 0.3),
+                rgba(251, 207, 149, 1),
+                rgba(251, 207, 149, 0.3),
+                transparent);
+        border-radius: 50px;
+        animation: gradientFlow 8s linear infinite;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 4;
+    }
+
+    .roi__title {
+        font-family: 'Playfair Display', serif;
+        font-size: 32px;
+        margin-bottom: 40px;
+        color: #daccb5;
+    }
+
+    .roi__cards {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 30px;
+        justify-content: center;
+
+        .roi__card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid $gold;
+            border-radius: 12px;
+            padding: 25px 20px;
+            width: 280px;
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+            &:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 15px 40px rgba(173, 171, 5, 0.3);
+            }
+
+            .roi__card-title {
+                font-family: 'Playfair Display', serif;
+                font-size: 22px;
+                font-weight: 500;
+                color: #daccb5;
+                margin-bottom: 15px;
+            }
+
+            .roi__item {
+                display: flex;
+                align-items: center;
+                gap: 10px;
+                font-size: 14px;
+
+                .roi__icon {
+                    img {
+                        display: block;
+                        width: 32px;
+                        height: 32px;
+                    }
+                }
+            }
+
+            .roi__price {
+                font-size: 18px;
+                font-weight: 600;
+                color: $gold;
+
+                span {
+                    font-weight: 400;
+                    font-size: 14px;
+                    margin-left: 5px;
+                    color: rgba(218, 204, 181, 0.8);
+
+                }
+            }
+        }
+    }
+}
+
+// //  преимущества
+
+.advantages {
+    padding: 40px 20px;
+    width: 100%;
+    background: #0f0f10;
+    color: #daccb5;
+    text-align: center;
+    font-family: 'Inter', sans-serif;
+    position: relative;
+
+    hr.gradient-hr {
+        border: none;
+        height: 3px;
+        width: 100%;
+        background: linear-gradient(90deg, transparent, rgba(251, 207, 149, 0.3), rgba(251, 207, 149, 1), rgba(251, 207, 149, 0.3), transparent);
+        border-radius: 50px;
+        margin-bottom: 30px;
+    }
+
+    h2 {
+        font-family: 'Playfair Display', serif;
+        font-size: 32px;
+        margin-bottom: 40px;
+    }
+
+    .acc-schedule {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+
+        .acc-item {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            overflow: hidden;
+            border: 1px solid $gold;
+            transition: all 0.3s ease;
+
+            &.active {
+                border-color: $gold;
+            }
+
+            .acc-head {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 16px 20px;
+                cursor: pointer;
+                transition: all 0.3s ease;
+
+                .acc-day {
+                    font-family: sans-serif;
+                    font-size: 18px;
+                    color: #daccb5;
+                    opacity: 0.9;
+                    font-weight: 500;
+                    text-align: left;
+                }
+
+                .acc-icon {
+                    font-size: 22px;
+                    color: $gold;
+                    transition: transform 0.3s ease;
+
+                    &:active {
+                        transform: rotate(45deg);
+                    }
+                }
+            }
+
+            .acc-content {
+                max-height: 0;
+                overflow: hidden;
+
+                transition: max-height 0.4s ease;
+
+                .acc-time {
+                    padding: 16px 20px;
+
+                    ul {
+                        list-style: disc inside;
+                        margin: 0;
+                        padding: 0;
+                        text-align: left;
+
+                        li {
+                            font-size: 15px;
+                            color: #daccb5;
+                            margin-bottom: 10px;
+                            font-family: 'Inter', sans-serif;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+// concurents
+
+.concurent {
+    padding: 60px 20px;
+    width: 100%;
+    background: #0f0f10;
+    color: #daccb5;
+    text-align: center;
+    font-family: $inter;
+    position: relative;
+
+    hr.gradient-hr {
+        border: none;
+        height: 3px;
+        width: 100%;
+        background: linear-gradient(90deg, transparent, rgba(251, 207, 149, 0.3), rgba(251, 207, 149, 1), rgba(251, 207, 149, 0.3), transparent);
+        border-radius: 50px;
+        margin-bottom: 30px;
+    }
+
+    h2 {
+        font-family: 'Playfair Display', serif;
+        font-size: 32px;
+        margin-bottom: 40px;
+    }
+
+    .comparison__wrapper {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 30px;
+        justify-content: center;
+        max-width: 1100px;
+        margin: 0 auto;
+    }
+
+    &__card {
+        width: 70%;
+        height: auto;
+        background: rgba(255, 255, 255, 0.05);
+        backdrop-filter: blur(15px);
+        -webkit-backdrop-filter: blur(15px);
+        border: 1px solid rgba($gold, 0.3);
+        border-radius: 16px;
+        padding: 30px 20px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        text-align: left;
+
+        &:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba($gold, 0.2);
+        }
+
+        &.advantage {
+            border-color: $gold;
+            background: rgba($gold, 0.05);
+        }
+    }
+
+    &__header {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        margin-bottom: 25px;
+        border-bottom: 1px solid rgba($gold, 0.3);
+        padding-bottom: 15px;
+
+        h3 {
+            font-family: $playfair;
+            font-size: 24px;
+            font-weight: 500;
+            color: #daccb5;
+            margin: 0;
+        }
+    }
+
+    &__icon {
+        img {
+            width: 120px;
+            display: block;
+        }
+    }
+
+    &__list {
+        text-align: left;
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        border: 1px solid rgba($gold, 0.2);
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+
+        li {
+            font-family: $inter;
+            font-size: 16px;
+            color: #daccb5;
+            // margin-bottom: 16px;
+            display: flex;
+            align-items: flex-start;
+            word-break: break-word;
+            gap: 10px;
+            line-height: 1.4;
+        }
+    }
+
+    &__mark {
+        display: inline-block;
+        font-size: 18px;
+        font-weight: 600;
+        min-width: 24px;
+        color: $gold;
+        flex-shrink: 0;
+    }
+
+    &__card.advantage &__mark {
+        color: #4caf50;
+    }
+
+    @media (max-width: 768px) {
+        &__wrapper {
+            flex-direction: column;
+            align-items: center;
+        }
+
+        &__card {
+            width: 100%;
+            max-width: 450px;
+        }
+    }
+}
+
+// Простой футер
+.footer {
+    padding: 40px 20px 20px;
+    width: 100%;
+    background: $grafit;
+    color: #daccb5;
+    font-family: $inter;
+    position: relative;
+
+    hr.gradient-hr {
+        border: none;
+        height: 3px;
+        width: 100%;
+        background: linear-gradient(90deg,
+                transparent,
+                rgba(251, 207, 149, 0.3),
+                rgba(251, 207, 149, 1),
+                rgba(251, 207, 149, 0.3),
+                transparent);
+        border-radius: 50px;
+        animation: gradientFlow 8s linear infinite;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+
+    &__content {
+        max-width: 1200px;
+        margin: 0 auto;
+        position: relative;
+        z-index: 2;
+    }
+
+    &__row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: wrap;
+        gap: 30px;
+        margin-bottom: 40px;
+
+        @media (max-width: 768px) {
+            flex-direction: column;
+            text-align: center;
+        }
+    }
+
+    &__logo {
+        img {
+            width: 150px;
+            display: block;
+
+            @media (max-width: 768px) {
+                margin: 0 auto;
+            }
+        }
+    }
+
+    &__nav {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px 30px;
+        justify-content: center;
+
+        a {
+            font-family: $inter;
+            font-size: 14px;
+            color: #daccb5;
+            text-decoration: none;
+            opacity: 0.9;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+
+            @media (max-width: 768px) {
+                white-space: normal;
+                font-size: 16px;
+            }
+
+            &:hover {
+                color: $gold;
+                opacity: 1;
+            }
+        }
+    }
+
+    &__bottom {
+        text-align: center;
+        padding-top: 20px;
+        border-top: 1px solid rgba($gold, 0.2);
+    }
+
+    &__copyright {
+        font-family: $inter;
+        font-size: 13px;
+        color: rgba(218, 204, 181, 0.6);
+    }
+}
+
+@keyframes gradientFlow {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    100% {
+        background-position: 200% 50%;
     }
 }
