@@ -1,0 +1,247 @@
+$playfair: "Playfair Display", Georgia, serif;
+$inter: "Inter", sans-serif;
+
+$grafit: #0D0F12;
+$gold: #D4AF37;
+$gold-gradient: linear-gradient(135deg, #C6A96B, #E6C98A);
+
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.hero {
+    background: url(../img/Khakassia5.png) no-repeat center center;
+    background-size: cover;
+    width: 100%;
+    height: 100vh;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &::after {
+        content: "";
+        position: absolute;
+        bottom: 0; // внизу секции
+        left: 50%;
+        transform: translateX(-50%);
+        width: 100%;
+        height: 2px;
+        background: $gold-gradient;
+        border-radius: 1px;
+        overflow: hidden;
+        animation: borderSlide 3s linear infinite;
+        z-index: 3;
+    }
+
+    @keyframes borderSlide {
+        0% {
+            background-position: 0% 0%;
+        }
+
+        100% {
+            background-position: 200% 0%;
+        }
+    }
+
+    &::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        background: rgba(0, 0, 0, 0.55);
+    }
+
+    .hero-inner {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+        gap: 32px;
+        z-index: 2;
+
+        h1 {
+            font-family: $playfair;
+            font-size: 44px;
+            font-weight: 500;
+            color: #daccb5;
+            letter-spacing: 0.5px;
+            filter: brightness(110%);
+        }
+
+        h2 {
+            font-family: $inter;
+            font-size: 24px;
+            font-weight: 400;
+            color: #daccb5;
+            opacity: 0.95;
+        }
+
+        .hero-btn {
+            font-family: $inter;
+            font-weight: 500;
+            font-size: 16px;
+            padding: 14px 32px;
+            border: none;
+            border-radius: 2px;
+            cursor: pointer;
+            text-decoration: none;
+            background: $gold-gradient; // твой градиент
+            color: $grafit;
+            position: relative;
+            overflow: hidden;
+            filter: brightness(110%);
+            transition: all 0.7s ease;
+
+            &:hover {
+                transform: translateY(-2px);
+            }
+
+            &::before {
+                content: "";
+                position: absolute;
+                top: 0;
+                left: 50%;
+                transform: translateX(-50%);
+                width: 80%;
+                height: 17px;
+                background: radial-gradient(circle, rgba(252, 242, 176, 0.719) 0%, rgba(255, 215, 0, 0) 110%);
+                pointer-events: none;
+                filter: brightness(115%);
+            }
+
+            &:hover::before {
+                // background: radial-gradient(circle, rgba(255, 215, 0, 1) 0%, rgba(255, 215, 0, 0) 80%);
+                filter: brightness(125%);
+            }
+        }
+
+    }
+}
+
+//  section two
+
+.section-two {
+    width: 100%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 40px 20px 20px;
+    gap: 24px;
+    position: relative;
+    background: url(../img/images.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: bottom;
+
+    &::before {
+        content: "";
+        position: absolute;
+        inset: 0;
+        z-index: 1;
+        background: rgba(0, 0, 0, 0.55);
+    }
+
+    h2 {
+        font-family: $playfair;
+        font-size: 32px;
+        font-weight: 500;
+        color: #daccb5;
+        z-index: 2;
+    }
+
+    p {
+        font-family: $inter;
+        font-size: 20px;
+        font-weight: 400;
+        color: #daccb5;
+        opacity: 0.95;
+        z-index: 2;
+    }
+
+    &__inner {
+        display: flex;
+        gap: 40px;
+        flex-wrap: wrap;
+        justify-content: center;
+        z-index: 2;
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 16px;
+        padding: 20px;
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+        border: 1px solid rgba(255, 255, 255, 0.3);
+
+        .dropdown {
+            position: relative;
+            width: 300px;
+
+            &-button {
+                background: transparent;
+                color: #dbd2c4;
+                padding: 12px 20px;
+                font-size: 16px;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+                width: 100%;
+                text-align: center;
+                transition: all 0.3s ease;
+
+                span {
+                    color: $gold;
+                }
+
+                &:hover {
+                    background-color: rgba(255, 255, 255, 0.1);
+                }
+            }
+
+            &-content {
+                top: 100%;
+                left: 0;
+                right: 0;
+                border: 1px solid $gold;
+                border-radius: 4px;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.3s ease;
+                box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+                z-index: 10;
+
+                &.active {
+                    max-height: 500px;
+                    transition: max-height 0.5s ease;
+                }
+            }
+
+            .schedule-item {
+                padding: 12px 20px;
+                border-bottom: 1px solid $gold;
+                cursor: pointer;
+                transition: all 0.2s ease;
+
+                &:last-child {
+                    border-bottom: none;
+                }
+
+                .day-title {
+                    font-weight: bold;
+                    margin-bottom: 5px;
+                    color: #dbd2c4;
+                }
+            }
+        }
+    }
+}
