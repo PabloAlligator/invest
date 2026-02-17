@@ -89,9 +89,7 @@ body {
   animation: rainDown linear forwards;
   text-shadow: 0 0 10px rgba(251, 207, 149, 0.5);
   z-index: 1;
-  -webkit-user-select: none;
-     -moz-user-select: none;
-          user-select: none;
+  user-select: none;
   pointer-events: none;
 }
 
@@ -337,12 +335,13 @@ body {
   opacity: 0.95;
 }
 .hero .hero-inner .hero-btn {
+  max-width: 300px;
   font-family: "Inter", sans-serif;
   font-weight: 700;
-  font-size: 16px;
+  font-size: 14px;
   padding: 14px 32px;
   border: none;
-  border-radius: 2px;
+  border-radius: 12px;
   cursor: pointer;
   text-decoration: none;
   background: linear-gradient(135deg, #C6A96B, #E6C98A);

@@ -385,12 +385,13 @@ body {
         }
 
         .hero-btn {
+            max-width: 300px;
             font-family: $inter;
             font-weight: 700;
-            font-size: 16px;
+            font-size: 14px;
             padding: 14px 32px;
             border: none;
-            border-radius: 2px;
+            border-radius: 12px;
             cursor: pointer;
             text-decoration: none;
             background: $gold-gradient;
