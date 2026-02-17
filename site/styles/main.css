@@ -339,10 +339,11 @@ body {
 .hero .hero-inner .hero-btn {
   font-family: "Inter", sans-serif;
   font-weight: 700;
-  font-size: 16px;
+  max-width: 300px;
+  font-size: 14px;
   padding: 14px 32px;
   border: none;
-  border-radius: 2px;
+  border-radius: 12px;
   cursor: pointer;
   text-decoration: none;
   background: linear-gradient(135deg, #C6A96B, #E6C98A);
